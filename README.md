@@ -2,11 +2,17 @@
 
 # 🎵 MPAria
 
-**Private, offline-first music player for the music you own.**
+### *Your music. Your machine. No cloud. No ads. No account.*
+
+**The private, offline-first music player that puts you back in control of your collection.**
+Import your own files, organize them beautifully, and listen anywhere — even with zero internet.
 
 [![GitHub](https://img.shields.io/badge/GitHub-avikasmin5773--debug%2FMPAria-181717?logo=github)](https://github.com/avikasmin5773-debug/MPAria)
-[![Platform](https://img.shields.io/badge/platform-macOS-lightgrey?logo=apple)](#)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey)](#)
 [![License](https://img.shields.io/badge/license-MIT-green)](#)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](#)
+
+> 🚀 **Download the macOS DMG below and start listening in seconds.**
 
 </div>
 
