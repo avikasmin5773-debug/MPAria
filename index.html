@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="MPAria is a private, offline-first music player for the music you own.">
+  <title>MPAria — Offline Music Player</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <!-- Inline icon set keeps the app fully offline. -->
+  <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.4 4.6a1.4 1.4 0 0 1 2.12-1.2l10.1 6.28a1.4 1.4 0 0 1 0 2.38L9.52 18.35a1.4 1.4 0 0 1-2.12-1.2V4.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4.2" height="16" rx="1.4" fill="currentColor"/><rect x="13.8" y="4" width="4.2" height="16" rx="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5.2c0-.8.9-1.3 1.5-.8l8.8 6.1c.6.4.6 1.2 0 1.6l-8.8 6.2A1 1 0 0 1 6 17.5V5.2Z" fill="currentColor"/><rect x="3.1" y="4.2" width="2.1" height="15.6" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M18 5.2c0-.8-.9-1.3-1.5-.8l-8.8 6.1c-.6.4-.6 1.2 0 1.6l8.8 6.2a1 1 0 0 0 1.5-.8V5.2Z" fill="currentColor"/><rect x="18.8" y="4.2" width="2.1" height="15.6" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16.3 3.3a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-3 3a1 1 0 0 1-1.4-1.4l1.3-1.3h-1.9c-1 0-1.7.4-2.4 1.2l-1 1.2a1 1 0 0 1-1.5-1.3l1-1.3c1-1.2 2.3-1.9 4-1.9h1.8l-1.3-1.3a1 1 0 0 1 0-1.3Zm-10 2.9h.3c1.6 0 3 .7 4 1.9l6.3 8.2c.6.8 1.4 1.2 2.4 1.2h1.9l-1.3-1.3a1 1 0 0 1 1.4-1.4l3 3a1 1 0 0 1 0 1.4l-3 3a1 1 0 0 1-1.4-1.4l1.3-1.3h-1.9c-1.7 0-3.1-.7-4.1-2l-6.2-8c-.6-.8-1.4-1.2-2.4-1.2h-.3a1 1 0 0 1 0-2Zm0 9h.3c1 0 1.8-.4 2.4-1.1l1-1.3a1 1 0 1 1 1.6 1.1l-1 1.3c-1 1.3-2.4 2-4.1 2h-.3a1 1 0 0 1 0-2Z" fill="currentColor"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17.6 3.3a1 1 0 0 1 1.4 0l2.4 2.4a1 1 0 0 1 0 1.4l-2.4 2.4a1 1 0 0 1-1.4-1.4l.7-.7H7.2A2.2 2.2 0 0 0 5 9.6V11a1 1 0 1 1-2 0V9.6A4.2 4.2 0 0 1 7.2 5.4h11.1l-.7-.7a1 1 0 0 1 0-1.4ZM20 12a1 1 0 0 1 1 1v1.4a4.2 4.2 0 0 1-4.2 4.2H5.7l.7.7a1 1 0 1 1-1.4 1.4l-2.4-2.4a1 1 0 0 1 0-1.4l2.4-2.4a1 1 0 0 1 1.4 1.4l-.7.7h11.1a2.2 2.2 0 0 0 2.2-2.2V13a1 1 0 0 1 1-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-repeat-one" viewBox="0 0 24 24"><path d="M17.6 3.3a1 1 0 0 1 1.4 0l2.4 2.4a1 1 0 0 1 0 1.4l-2.4 2.4a1 1 0 0 1-1.4-1.4l.7-.7H7.2A2.2 2.2 0 0 0 5 9.6V11a1 1 0 1 1-2 0V9.6A4.2 4.2 0 0 1 7.2 5.4h11.1l-.7-.7a1 1 0 0 1 0-1.4ZM20 12a1 1 0 0 1 1 1v1.4a4.2 4.2 0 0 1-4.2 4.2H5.7l.7.7a1 1 0 1 1-1.4 1.4l-2.4-2.4a1 1 0 0 1 0-1.4l2.4-2.4a1 1 0 0 1 1.4 1.4l-.7.7h11.1a2.2 2.2 0 0 0 2.2-2.2V13a1 1 0 0 1 1-1Z" fill="currentColor"/><path d="M12.9 9.2v5.6a.8.8 0 0 1-1.6 0v-3.7l-.8.4a.8.8 0 1 1-.7-1.4l2-1a.8.8 0 0 1 1.1.1Z" fill="currentColor"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.3s-7.8-4.6-7.8-10.1A4.4 4.4 0 0 1 12 7.1a4.4 4.4 0 0 1 7.8 3.1c0 5.5-7.8 10.1-7.8 10.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-heart-fill" viewBox="0 0 24 24"><path d="M12 20.7s-8.3-4.9-8.3-10.6A4.8 4.8 0 0 1 12 6.8a4.8 4.8 0 0 1 8.3 3.3c0 5.7-8.3 10.6-8.3 10.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.3h3.2L12 5.5a.9.9 0 0 1 1.5.7v11.6a.9.9 0 0 1-1.5.7L7.2 14.7H4a1 1 0 0 1-1-1v-3.4a1 1 0 0 1 1-1Z" fill="currentColor"/><path d="M16.2 8.2a1 1 0 0 1 1.4.1 5.3 5.3 0 0 1 0 7.4 1 1 0 0 1-1.5-1.4 3.3 3.3 0 0 0 0-4.6 1 1 0 0 1 .1-1.5ZM18.9 5.2a1 1 0 0 1 1.4 0 9.6 9.6 0 0 1 0 13.6 1 1 0 1 1-1.4-1.4 7.6 7.6 0 0 0 0-10.8 1 1 0 0 1 0-1.4Z" fill="currentColor"/></symbol>
+    <symbol id="i-volume-mute" viewBox="0 0 24 24"><path d="M4 9.3h3.2L12 5.5a.9.9 0 0 1 1.5.7v11.6a.9.9 0 0 1-1.5.7L7.2 14.7H4a1 1 0 0 1-1-1v-3.4a1 1 0 0 1 1-1Z" fill="currentColor"/><path d="M16.2 9.5a1 1 0 0 1 1.4 0l1.5 1.5 1.5-1.5a1 1 0 1 1 1.4 1.4l-1.5 1.5 1.5 1.5a1 1 0 0 1-1.4 1.4L19.1 14l-1.5 1.5a1 1 0 0 1-1.4-1.4l1.5-1.5-1.5-1.5a1 1 0 0 1 0-1.4Z" fill="currentColor"/></symbol>
+    <symbol id="i-queue" viewBox="0 0 24 24"><path d="M4 6.2a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 4.8a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 4.8a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z" fill="currentColor"/><path d="M16.6 12.1v5.3a2.7 2.7 0 1 1-1.8-2.5v-4.1l5-1.1v2.3l-3.2.7v-.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M11 5a1 1 0 1 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5Z" fill="currentColor"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path d="M10.8 4a6.8 6.8 0 1 0 4.2 12.1l4 4a1 1 0 0 0 1.5-1.5l-4-4A6.8 6.8 0 0 0 10.8 4Zm-4.8 6.8a4.8 4.8 0 1 1 9.6 0 4.8 4.8 0 0 1-9.6 0Z" fill="currentColor"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M11.3 3.5a1 1 0 0 1 1.4 0l8 7.2a1 1 0 0 1-1.4 1.5L19 12v7a1.5 1.5 0 0 1-1.5 1.5H14a1 1 0 0 1-1-1V15h-2v4.5a1 1 0 0 1-1 1H6.5A1.5 1.5 0 0 1 5 19v-7l-.3.2a1 1 0 0 1-1.4-1.5l8-7.2Z" fill="currentColor"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M19.7 3.3a1 1 0 0 1 .8 1v11.2a3.7 3.7 0 1 1-2-3.3V7.4l-7 1.5v8.2a3.7 3.7 0 1 1-2-3.3V6.6a1 1 0 0 1 .8-1l8.5-1.8a1 1 0 0 1 .9.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-disc" viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 1 0 0 18.4 9.2 9.2 0 0 0 0-18.4Zm0 2a7.2 7.2 0 1 1 0 14.4 7.2 7.2 0 0 1 0-14.4Zm0 3.4a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm0 2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 3a3.3 3.3 0 0 0-3.3 3.3v5.4a3.3 3.3 0 0 0 6.6 0V6.3A3.3 3.3 0 0 0 12 3Zm-5.4 8.6a1 1 0 0 1 1 1 4.4 4.4 0 1 0 8.8 0 1 1 0 1 1 2 0 6.4 6.4 0 0 1-5.4 6.3v1.6h2.5a1 1 0 1 1 0 2H8.5a1 1 0 1 1 0-2H11v-1.6a6.4 6.4 0 0 1-5.4-6.3 1 1 0 0 1 1-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-playlist" viewBox="0 0 24 24"><path d="M4 5.8a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 4.8a1 1 0 0 1 1-1h11a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 4.8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z" fill="currentColor"/><path d="M16.6 11.8v5.6a2.8 2.8 0 1 1-2-2.7V10l5.4-1.2v2.4l-3.4.6Z" fill="currentColor"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M11 3.8a1 1 0 1 1 2 0v8.5l2.2-2.1a1 1 0 1 1 1.4 1.4l-3.9 3.9a1 1 0 0 1-1.4 0l-3.9-3.9a1 1 0 0 1 1.4-1.4l2.2 2.1V3.8Z" fill="currentColor"/><path d="M5 15.2a1 1 0 0 1 1 1v1.3c0 .8.7 1.5 1.5 1.5h9c.8 0 1.5-.7 1.5-1.5v-1.3a1 1 0 1 1 2 0v1.3a3.5 3.5 0 0 1-3.5 3.5h-9A3.5 3.5 0 0 1 4 17.5v-1.3a1 1 0 0 1 1-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.2" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="18.8" cy="12" r="1.7" fill="currentColor"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.2 6.2a1 1 0 0 1 1.4 0l4.4 4.4 4.4-4.4a1 1 0 1 1 1.4 1.4L13.4 12l4.4 4.4a1 1 0 0 1-1.4 1.4L12 13.4l-4.4 4.4a1 1 0 0 1-1.4-1.4l4.4-4.4-4.4-4.4a1 1 0 0 1 0-1.4Z" fill="currentColor"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15.3 4.7a1 1 0 0 1 0 1.4L9.4 12l5.9 5.9a1 1 0 1 1-1.4 1.4l-6.6-6.6a1 1 0 0 1 0-1.4l6.6-6.6a1 1 0 0 1 1.4 0Z" fill="currentColor"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M8.7 4.7a1 1 0 0 1 1.4 0l6.6 6.6a1 1 0 0 1 0 1.4l-6.6 6.6a1 1 0 0 1-1.4-1.4l5.9-5.9-5.9-5.9a1 1 0 0 1 0-1.4Z" fill="currentColor"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Zm-1.7-5.1a1 1 0 0 1 1-.8h1.4a1 1 0 0 1 1 .8l.3 1.8c.4.2.8.4 1.2.7l1.7-.7a1 1 0 0 1 1.2.4l.7 1.2a1 1 0 0 1-.2 1.2l-1.4 1.2v1.4l1.4 1.2a1 1 0 0 1 .2 1.2l-.7 1.2a1 1 0 0 1-1.2.4l-1.7-.7c-.4.3-.8.5-1.2.7l-.3 1.8a1 1 0 0 1-1 .8h-1.4a1 1 0 0 1-1-.8l-.3-1.8c-.4-.2-.8-.4-1.2-.7l-1.7.7a1 1 0 0 1-1.2-.4l-.7-1.2a1 1 0 0 1 .2-1.2l1.4-1.2v-1.4L5 9.1a1 1 0 0 1-.2-1.2l.7-1.2a1 1 0 0 1 1.2-.4l1.7.7c.4-.3.8-.5 1.2-.7l.3-1.8Z" fill="currentColor"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M9.2 3.4a1 1 0 0 0-.9.6L7.5 5.5H4.8a1 1 0 1 0 0 2h14.4a1 1 0 1 0 0-2h-2.7L15.7 4a1 1 0 0 0-.9-.6H9.2Zm-3 5.4a1 1 0 0 0-1 1.1l.8 9.6a2 2 0 0 0 2 1.9h8a2 2 0 0 0 2-1.9l.8-9.6a1 1 0 0 0-1-1.1H6.2Zm3.1 2.6a.9.9 0 0 1 .9.9v5.5a.9.9 0 1 1-1.8 0v-5.5a.9.9 0 0 1 .9-.9Zm4.5 0a.9.9 0 0 1 .9.9v5.5a.9.9 0 1 1-1.8 0v-5.5a.9.9 0 0 1 .9-.9Z" fill="currentColor"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.8 6.5A2.5 2.5 0 0 1 6.3 4h3.2c.7 0 1.3.3 1.8.8l1.1 1.2h5.3a2.5 2.5 0 0 1 2.5 2.5v8.9a2.5 2.5 0 0 1-2.5 2.6H6.3a2.5 2.5 0 0 1-2.5-2.5V6.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.4 14.6a8.8 8.8 0 0 1-11-11A9 9 0 1 0 20.4 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-eq" viewBox="0 0 24 24"><path d="M5 4.5a1 1 0 0 1 1 1v5.8a1 1 0 1 1-2 0V5.5a1 1 0 0 1 1-1Zm7 0a1 1 0 0 1 1 1v2.1a1 1 0 1 1-2 0V5.5a1 1 0 0 1 1-1Zm7 0a1 1 0 0 1 1 1v8.7a1 1 0 1 1-2 0V5.5a1 1 0 0 1 1-1ZM5 15.7a1 1 0 0 1 1 1v2.8a1 1 0 1 1-2 0v-2.8a1 1 0 0 1 1-1Zm7-4.6a1 1 0 0 1 1 1v6.6a1 1 0 1 1-2 0v-6.6a1 1 0 0 1 1-1Zm7-8.1a1 1 0 0 1 1 1v2.7a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Z" fill="currentColor" opacity=".95"/><circle cx="5" cy="13" r="2" fill="currentColor"/><circle cx="12" cy="9.2" r="2" fill="currentColor"/><circle cx="19" cy="16.8" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20.3 5.7a1 1 0 0 1 0 1.4l-10.6 11a1 1 0 0 1-1.4 0L3.7 13.6a1 1 0 0 1 1.4-1.4l3.9 4 9.9-10.4a1 1 0 0 1 1.4-.1Z" fill="currentColor"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.7c.4 4.6 2.7 6.9 7.3 7.3.5 0 .5.9 0 .9-4.6.4-6.9 2.7-7.3 7.3 0 .5-.9.5-.9 0-.4-4.6-2.7-6.9-7.3-7.3-.5 0-.5-.9 0-.9 4.6-.4 6.9-2.7 7.3-7.3a.5.5 0 0 1 .9 0Z" fill="currentColor"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.2c2.2 2.4 3.3 5.4 3.3 8.8s-1.1 6.4-3.3 8.8c-2.2-2.4-3.3-5.4-3.3-8.8S9.8 5.6 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.2V12l3.1 2.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Zm0 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z" fill="currentColor"/></symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M3.3 4.7a1 1 0 0 1 1.4 0l15 15a1 1 0 0 1-1.4 1.4l-2-2A8 8 0 0 1 12 20a8 8 0 0 1-4.3-1.3 1 1 0 1 1 1.2-1.6 6 6 0 0 0 6.2 0l-2.2-2.2a2.7 2.7 0 0 1-4.5-2 2.7 2.7 0 0 1 .3-1.2L3.3 6.1a1 1 0 0 1 0-1.4Zm2.4 4.9a1 1 0 0 1 .2 1.4l-.2.2a1 1 0 0 1-1.4-1.4l.2-.2a1 1 0 0 1 1.2 0Zm11 0a10 10 0 0 0-1.2-.7 1 1 0 1 1 .8-1.8c.5.2 1 .5 1.5.8a1 1 0 0 1-1.1 1.7ZM12 6.5a11 11 0 0 0-2.5.3 1 1 0 1 1-.4-2A13 13 0 0 1 12 4.5c2 0 3.9.5 5.6 1.3a1 1 0 0 1-.9 1.8A9 9 0 0 0 12 6.5Z" fill="currentColor"/></symbol>
+  </svg>
+
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-action="go-home" aria-label="MPAria home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg class="icon"><use href="#i-music"/></svg>
+        </span>
+        <span class="brand-type">
+          <strong>MPAria</strong>
+          <small>Music</small>
+        </span>
+      </a>
+
+      <div class="sidebar-group">
+        <div class="sidebar-heading">MPAria Music</div>
+        <nav class="primary-nav" aria-label="Music">
+          <button class="nav-item is-active" data-nav="home">
+            <svg class="icon"><use href="#i-home"/></svg><span>Listen Now</span>
+          </button>
+          <button class="nav-item" data-nav="discover">
+            <svg class="icon"><use href="#i-globe"/></svg><span>Browse</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-heading">Library</div>
+        <nav class="primary-nav" aria-label="Library">
+          <button class="nav-item" data-nav="songs">
+            <svg class="icon"><use href="#i-music"/></svg><span>Songs</span><em id="navSongCount"></em>
+          </button>
+          <button class="nav-item" data-nav="albums">
+            <svg class="icon"><use href="#i-disc"/></svg><span>Albums</span>
+          </button>
+          <button class="nav-item" data-nav="artists">
+            <svg class="icon"><use href="#i-mic"/></svg><span>Artists</span>
+          </button>
+          <button class="nav-item" data-nav="favorites">
+            <svg class="icon"><use href="#i-heart"/></svg><span>Favorites</span><em id="navFavCount"></em>
+          </button>
+          <button class="nav-item" data-nav="playlists">
+            <svg class="icon"><use href="#i-playlist"/></svg><span>Playlists</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-section playlists-section">
+        <div class="sidebar-heading">
+          <span>Your playlists</span>
+          <button class="icon-btn tiny" data-action="new-playlist" title="New playlist" aria-label="New playlist">
+            <svg class="icon"><use href="#i-plus"/></svg>
+          </button>
+        </div>
+        <div class="sidebar-playlists" id="sidebarPlaylists"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="import-btn" id="importButton">
+          <span class="import-icon"><svg class="icon"><use href="#i-plus"/></svg></span>
+          <span><strong>Import music</strong><small>MP3, M4A, FLAC, WAV</small></span>
+        </button>
+        <button class="storage-card" data-action="open-settings" aria-label="Open library settings">
+          <span class="storage-top"><span class="online-dot" id="onlineDot"></span><span id="storageLabel">Stored on this Mac</span></span>
+          <span class="storage-bar"><span id="storageBar"></span></span>
+          <span class="storage-detail" id="storageDetail">Checking storage…</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" data-action="toggle-nav" aria-label="Open navigation">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+        <div class="topbar-history">
+          <button class="icon-btn round" id="historyBack" data-action="history-back" title="Back" aria-label="Back" disabled>
+            <svg class="icon"><use href="#i-chevron-left"/></svg>
+          </button>
+          <button class="icon-btn round" id="historyForward" data-action="history-forward" title="Forward" aria-label="Forward" disabled>
+            <svg class="icon"><use href="#i-chevron-right"/></svg>
+          </button>
+        </div>
+        <label class="search-field" for="globalSearch">
+          <svg class="icon"><use href="#i-search"/></svg>
+          <input id="globalSearch" type="search" placeholder="Search" autocomplete="off" spellcheck="false">
+          <kbd>⌘K</kbd>
+        </label>
+        <div class="topbar-actions">
+          <span class="offline-pill" id="offlinePill" hidden><svg class="icon"><use href="#i-wifi-off"/></svg>Offline</span>
+          <button class="icon-btn round" id="themeToggle" title="Toggle appearance" aria-label="Toggle appearance">
+            <svg class="icon theme-icon-dark"><use href="#i-sun"/></svg>
+            <svg class="icon theme-icon-light"><use href="#i-moon"/></svg>
+          </button>
+          <button class="import-pill" data-action="import-files">
+            <svg class="icon"><use href="#i-plus"/></svg><span>Add Music</span>
+          </button>
+          <button class="icon-btn round" data-action="open-settings" title="Settings" aria-label="Settings">
+            <svg class="icon"><use href="#i-settings"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-scroll" id="contentScroll">
+        <section class="view-root" id="viewRoot" aria-live="polite">
+          <div class="boot-loader">
+            <span class="loader-ring"></span>
+            <p>Opening your library…</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside class="now-panel" id="nowPanel" aria-label="Now playing">
+      <div class="now-topbar">
+        <span class="now-panel-title">Playing Next</span>
+        <div class="now-topbar-actions">
+          <button class="icon-btn tiny" data-action="sleep-timer" title="Sleep timer" aria-label="Sleep timer">
+            <svg class="icon"><use href="#i-clock"/></svg>
+          </button>
+          <button class="icon-btn tiny now-close" data-action="toggle-now" aria-label="Close now playing">
+            <svg class="icon"><use href="#i-close"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="now-art-wrap">
+        <div class="now-art placeholder-art" id="nowArtwork" role="img" aria-label="Album artwork">
+          <span class="art-glyph"><svg class="icon"><use href="#i-music"/></svg></span>
+          <span class="art-initials" id="nowArtInitials"></span>
+        </div>
+        <div class="art-reflection" id="nowArtReflection" aria-hidden="true"></div>
+      </div>
+
+      <div class="now-meta">
+        <div class="now-title-row">
+          <div>
+            <h2 id="nowTitle">Nothing playing</h2>
+            <p id="nowArtist">Add a song or choose one from your library</p>
+          </div>
+          <button class="icon-btn favorite-now" id="nowFavorite" data-action="toggle-current-favorite" aria-label="Favorite current song" disabled>
+            <svg class="icon"><use href="#i-heart"/></svg>
+          </button>
+        </div>
+        <p class="now-album" id="nowAlbum"></p>
+      </div>
+
+      <div class="visualizer-wrap">
+        <canvas id="visualizer" height="72" aria-hidden="true"></canvas>
+        <div class="visualizer-idle" id="visualizerIdle">A little visual static</div>
+      </div>
+
+      <div class="now-tabs" role="tablist" aria-label="Now playing panel">
+        <button class="now-tab is-active" data-now-tab="queue" role="tab" aria-selected="true">Up next</button>
+        <button class="now-tab" data-now-tab="eq" role="tab" aria-selected="false">Equalizer</button>
+      </div>
+
+      <div class="now-tab-panel" id="queuePanel">
+        <div class="queue-head">
+          <span id="queueSummary">Queue is empty</span>
+          <button class="text-btn" data-action="clear-queue">Clear</button>
+        </div>
+        <div class="queue-list" id="queueList">
+          <div class="panel-empty">
+            <svg class="icon"><use href="#i-queue"/></svg>
+            <p>Play a song to start a queue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="now-tab-panel" id="eqPanel" hidden>
+        <div class="eq-head">
+          <span>5-band equalizer</span>
+          <select id="eqPreset" class="mini-select" aria-label="Equalizer preset">
+            <option value="flat">Flat</option>
+            <option value="bass">Bass boost</option>
+            <option value="vocal">Vocal</option>
+            <option value="rock">Rock</option>
+            <option value="electronic">Electronic</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="eq-bands" id="eqBands"></div>
+        <p class="eq-note">Changes are saved automatically.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="nav-backdrop" id="navBackdrop" data-action="toggle-nav"></div>
+
+  <footer class="player-bar" id="playerBar" aria-label="Player">
+    <div class="player-now">
+      <button class="mini-art placeholder-art" id="miniArtwork" data-action="toggle-now" aria-label="Open now playing">
+        <span class="art-glyph"><svg class="icon"><use href="#i-music"/></svg></span>
+        <span class="mini-art-initials" id="miniArtInitials"></span>
+      </button>
+      <div class="player-now-text">
+        <button class="player-song" id="playerTitle" data-action="toggle-now">Choose a song</button>
+        <p id="playerArtist">Your library, offline</p>
+      </div>
+      <button class="icon-btn player-heart" id="playerFavorite" data-action="toggle-current-favorite" aria-label="Favorite current song" disabled>
+        <svg class="icon"><use href="#i-heart"/></svg>
+      </button>
+    </div>
+
+    <div class="player-center">
+      <div class="transport">
+        <button class="icon-btn control-quiet" id="shuffleBtn" data-action="toggle-shuffle" title="Shuffle (S)" aria-label="Shuffle">
+          <svg class="icon"><use href="#i-shuffle"/></svg>
+        </button>
+        <button class="icon-btn control-quiet" data-action="seek-back" title="Back 10s" aria-label="Back 10 seconds">
+          <svg class="icon"><use href="#i-prev"/></svg>
+        </button>
+        <button class="icon-btn" data-action="previous" title="Previous (⌘←)" aria-label="Previous">
+          <svg class="icon"><use href="#i-prev"/></svg>
+        </button>
+        <button class="play-button" id="playPauseBtn" data-action="toggle-play" title="Play / pause (Space)" aria-label="Play">
+          <svg class="icon" data-play-icon><use href="#i-play"/></svg>
+        </button>
+        <button class="icon-btn" data-action="next" title="Next (⌘→)" aria-label="Next">
+          <svg class="icon"><use href="#i-next"/></svg>
+        </button>
+        <button class="icon-btn control-quiet" data-action="seek-forward" title="Forward 10s" aria-label="Forward 10 seconds">
+          <svg class="icon"><use href="#i-next"/></svg>
+        </button>
+        <button class="icon-btn control-quiet" id="repeatBtn" data-action="cycle-repeat" title="Repeat (R)" aria-label="Repeat off">
+          <svg class="icon"><use href="#i-repeat"/></svg>
+        </button>
+      </div>
+      <div class="progress-row">
+        <span class="time-label" id="currentTime">0:00</span>
+        <input class="range progress-range" id="progressRange" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+        <span class="time-label" id="durationTime">0:00</span>
+      </div>
+    </div>
+
+    <div class="player-extra">
+      <button class="icon-btn" data-action="toggle-now" title="Queue" aria-label="Queue">
+        <svg class="icon"><use href="#i-queue"/></svg>
+      </button>
+      <button class="icon-btn" data-action="cycle-speed" title="Playback speed" aria-label="Playback speed" id="speedBtn">1x</button>
+      <button class="icon-btn" data-action="toggle-mini" title="Mini player" aria-label="Mini player">
+        <svg class="icon"><use href="#i-music"/></svg>
+      </button>
+      <button class="icon-btn" data-action="toggle-eq" title="Equalizer" aria-label="Equalizer">
+        <svg class="icon"><use href="#i-eq"/></svg>
+      </button>
+      <div class="volume-control">
+        <button class="icon-btn" id="muteBtn" data-action="toggle-mute" title="Mute (M)" aria-label="Mute">
+          <svg class="icon"><use href="#i-volume"/></svg>
+        </button>
+        <input class="range volume-range" id="volumeRange" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+      </div>
+    </div>
+    <audio id="audio" preload="metadata"></audio>
+  </footer>
+
+  <input type="file" id="fileInput" accept="audio/*,video/*,image/*,.jpg,.jpeg,.png,.gif,.webp,.bmp,.tiff,.tif,.heic,.heif,.svg,.avif,.ico,.mp1,.mp2,.mp3,.mp4,.m4a,.m4b,.m4p,.m4r,.m4v,.aac,.flac,.wav,.wave,.ogg,.oga,.opus,.webm,.aif,.aiff,.aifc,.alac,.wma,.wmv,.mov,.avi,.mkv,.mpa,.mpga,.mpe,.mpeg,.mpg,.3gp,.3g2,.amr,.awb,.caf,.dsf,.dff,.mka,.ra,.ram,.rm,.rma,.spx,.tta,.voc,.vox,.vqf,.wv,.xm,.mod,.s3m,.it,.mtm,.umx,.mo3,.ac3,.dts,.mlp,.thd,.eac3,.m2ts,.ts,.mts,.m2t,.m1a,.m2a,.mp4a,.mp4v,.qt,.mov" multiple hidden>
+  <input type="file" id="folderInput" accept="audio/*,video/*,image/*,.jpg,.jpeg,.png,.gif,.webp,.bmp,.tiff,.tif,.heic,.heif,.svg,.avif,.ico,.mp1,.mp2,.mp3,.mp4,.m4a,.m4b,.m4p,.m4r,.m4v,.aac,.flac,.wav,.wave,.ogg,.oga,.opus,.webm,.aif,.aiff,.aifc,.alac,.wma,.wmv,.mov,.avi,.mkv,.mpa,.mpga,.mpe,.mpeg,.mpg,.3gp,.3g2,.amr,.awb,.caf,.dsf,.dff,.mka,.ra,.ram,.rm,.rma,.spx,.tta,.voc,.vox,.vqf,.wv,.xm,.mod,.s3m,.it,.mtm,.umx,.mo3,.ac3,.dts,.mlp,.thd,.eac3,.m2ts,.ts,.mts,.m2t,.m1a,.m2a,.mp4a,.mp4v,.qt,.mov" webkitdirectory multiple hidden>
+
+  <div class="drop-overlay" id="dropOverlay" aria-hidden="true">
+    <div class="drop-card">
+      <span class="drop-icon"><svg class="icon"><use href="#i-download"/></svg></span>
+      <h2>Drop your music here</h2>
+      <p>Files are copied into this app and stay offline.</p>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modalLayer" hidden>
+    <div class="modal-backdrop" data-action="close-modal"></div>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div>
+  </div>
+
+  <div class="context-menu" id="contextMenu" hidden></div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <div class="import-progress" id="importProgress" hidden>
+    <span class="import-spinner"></span>
+    <div>
+      <strong id="importProgressTitle">Importing music…</strong>
+      <span id="importProgressDetail">Preparing files</span>
+    </div>
+    <button class="icon-btn tiny" data-action="cancel-import" aria-label="Cancel import"><svg class="icon"><use href="#i-close"/></svg></button>
+  </div>
+
+  <script src="js/tags.js" defer></script>
+  <script src="js/db.js" defer></script>
+  <script src="js/audio-lab.js" defer></script>
+  <script src="js/app.js?v=8" defer></script>
+  <div id="ytOverlay" class="yt-overlay" hidden>
+    <div class="yt-frame-wrap">
+      <button type="button" class="icon-btn modal-close" aria-label="Close" onclick="var o=document.getElementById('ytOverlay'); var p=document.getElementById('ytPlayer'); if (p) p.innerHTML=''; if (o) o.hidden=true; return false;"><svg class="icon"><use href="#i-close"/></svg></button>
+      <div id="ytPlayer"></div>
+    </div>
+  </div>
+</body>
+</html>
