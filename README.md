@@ -99,4 +99,4 @@ Made with ❤️ for your personal collection.
 ## 📦 Releases
 
 - **v2.0.0** — macOS Intel (x86_64): [MPAria.dmg](releases/MPAria.dmg) · [MPAria.zip](releases/MPAria.zip)
-- Apple Silicon, Windows 11, and Linux: build from source (Python 3 + browser) or run the web UI; native wrappers coming soon.
+- **Cross-platform** (Windows 10/11, Linux, macOS Intel & Apple Silicon): run `run.bat` (Windows) or `run.sh` (macOS/Linux), or `python3 -m http.server 8000` and open `http://127.0.0.1:8000/index.html`. Requires Python 3.
