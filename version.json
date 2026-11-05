@@ -1,0 +1,10 @@
+{
+  "version": "1.0.1",
+  "notes": [
+    "Expanded playback speeds: 0.25× → 3×",
+    "New update popup with changelog",
+    "Menu bar icon with quick actions",
+    "Auto-update when 5+ releases behind",
+    "Improved README and screenshots"
+  ]
+}

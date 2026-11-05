@@ -51,7 +51,7 @@ Accepts **any** image type to set cover art.
 ### 📝 Lyrics Editor
 Per-track lyrics, stored locally.
 
-### 🎚️ Equalizer
+### 🎛️ Equalizer
 5-band EQ with presets.
 
 </td>
