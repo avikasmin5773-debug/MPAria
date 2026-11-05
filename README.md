@@ -1,32 +1,53 @@
-# MPAria — Offline Music Player
+<div align="center">
 
-MPAria is a private, offline-first desktop music player for the music you own. It runs as a native macOS app (WKWebView + local server) and stores your library in the browser's IndexedDB on your Mac. Nothing is uploaded anywhere.
+# 🎵 MPAria
 
-## Features
+**Private, offline-first music player for the music you own.**
 
-- Import MP3, M4A, FLAC, WAV, OGG and more (audio + video)
-- Auto Namer: names tracks from file names when tags are missing
-- Auto Thumbnail: uses the first frame of a video as its thumbnail
-- Drag & drop images to set artwork (any image type accepted)
-- Albums, artists, favorites, playlists
-- Playlist import/export (JSON)
-- Lyrics editor per track
-- Equalizer with presets
-- Playback speed control and ±10s skip
-- Mini player mode
-- Duplicate scanner and undo delete (press U)
-- Dark/light themes
-- Storage usage tracking
+[![GitHub](https://img.shields.io/badge/GitHub-avikasmin5773--debug%2FMPAria-181717?logo=github)](https://github.com/avikasmin5773-debug/MPAria)
+[![Platform](https://img.shields.io/badge/platform-macOS-lightgrey?logo=apple)](#)
+[![License](https://img.shields.io/badge/license-MIT-green)](#)
 
-## Screenshots
+</div>
 
-![Home](assets/screenshot-home.png)
-![Songs](assets/screenshot-songs.png)
-![Albums](assets/screenshot-albums.png)
-![Artists](assets/screenshot-artists.png)
-![Settings](assets/screenshot-settings.png)
+---
 
-## Setup
+## ✨ Features
+
+| | Feature | Description |
+|---|---|---|
+| 🏷️ | **Auto Namer** | Names tracks from file names when tags are missing |
+| 🖼️ | **Auto Thumbnail** | Uses the first frame of a video as its thumbnail |
+| 🎨 | **Drag & Drop Artwork** | Accepts any image type to set cover art |
+| 📝 | **Lyrics Editor** | Per-track lyrics, stored locally |
+| 🎚️ | **Equalizer** | 5-band EQ with presets |
+| ⚡ | **Playback Speed** | Cycle 0.5× → 2× |
+| ⏩ | **Skip Buttons** | ±10s seek controls |
+| 📀 | **Playlists** | Create, import & export (JSON) |
+| 🔁 | **Duplicate Scanner** | Find and remove duplicate tracks |
+| ↩️ | **Undo Delete** | Press `U` to restore a removed song |
+| 🌗 | **Themes** | Dark / light |
+| 📱 | **Mini Player** | Compact playback mode |
+
+## 📸 Screenshots
+
+<div align="center">
+
+| Home | Songs |
+|---|---|
+| ![Home](assets/screenshot-home.png) | ![Songs](assets/screenshot-songs.png) |
+
+| Albums | Artists |
+|---|---|
+| ![Albums](assets/screenshot-albums.png) | ![Artists](assets/screenshot-artists.png) |
+
+| Settings |
+|---|
+| ![Settings](assets/screenshot-settings.png) |
+
+</div>
+
+## 🚀 Setup
 
 ### Run the app (macOS)
 
@@ -43,25 +64,33 @@ Requires Xcode Command Line Tools (`swiftc`).
 
 ### Run the web UI standalone
 
-Serve this folder over `http://127.0.0.1`:
-
 ```bash
 python3 -m http.server 8000
+# then open http://127.0.0.1:8000/index.html
 ```
 
-Then open `http://127.0.0.1:8000/index.html`.
+## 📁 Source structure
 
-## Source structure
+```
+MPAria-source/
+├── index.html
+├── css/app.css
+├── js/
+│   ├── app.js          # application logic
+│   ├── db.js           # IndexedDB storage
+│   ├── tags.js         # audio metadata reader
+│   └── audio-lab.js    # starter track generator
+├── sw.js               # service worker
+├── manifest.webmanifest
+└── assets/
+```
 
-- `index.html` — app shell
-- `css/app.css` — styles
-- `js/app.js` — application logic
-- `js/db.js` — IndexedDB storage
-- `js/tags.js` — audio metadata reader
-- `js/audio-lab.js` — starter track generator
-- `sw.js` — service worker
-- `manifest.webmanifest` — PWA manifest
+## ⚖️ Copyright
 
-## Copyright
+MPAria does **not** bundle or download copyrighted music. Import only files you own or have the rights to use. A copyright reminder is shown on first launch.
 
-MPAria does not bundle or download copyrighted music. Import only files you own or have rights to use.
+---
+
+<div align="center">
+Made with ❤️ for your personal collection.
+</div>
