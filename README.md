@@ -94,3 +94,9 @@ MPAria does **not** bundle or download copyrighted music. Import only files you 
 <div align="center">
 Made with ❤️ for your personal collection.
 </div>
+
+
+## 📦 Releases
+
+- **v2.0.0** (tagged) — macOS Intel (x86_64) DMG + ZIP on the Releases page.
+- Apple Silicon, Windows 11, and Linux: build from source (Python 3 + browser) or run the web UI; native wrappers coming soon.
