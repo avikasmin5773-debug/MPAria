@@ -98,5 +98,5 @@ Made with ❤️ for your personal collection.
 
 ## 📦 Releases
 
-- **v2.0.0** (tagged) — macOS Intel (x86_64) DMG + ZIP on the Releases page.
+- **v2.0.0** — macOS Intel (x86_64): [MPAria.dmg](releases/MPAria.dmg) · [MPAria.zip](releases/MPAria.zip)
 - Apple Silicon, Windows 11, and Linux: build from source (Python 3 + browser) or run the web UI; native wrappers coming soon.
